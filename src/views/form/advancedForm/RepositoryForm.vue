@@ -1,73 +1,137 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-30 17:43:17
+ * @LastEditTime: 2020-12-31 02:19:14
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ant-design-vue-pro\src\views\form\advancedForm\RepositoryForm.vue
+-->
 <template>
   <a-form @submit="handleSubmit" :form="form" class="form">
     <a-row class="form-row" :gutter="16">
       <a-col :lg="6" :md="12" :sm="24">
-        <a-form-item label="仓库名">
+        <a-form-item label="员工姓名">
           <a-input
-            placeholder="请输入仓库名称"
+            placeholder="请输入员工姓名"
             v-decorator="[
               'name',
-              {rules: [{ required: true, message: '请输入仓库名称', whitespace: true}]}
+              {rules: [{ required: true, message: '请输入员工姓名', whitespace: true}]}
             ]" />
         </a-form-item>
       </a-col>
-      <a-col :xl="{span: 7, offset: 1}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
+      <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="仓库域名">
-          <a-input
-            addonBefore="http://"
-            addonAfter=".com"
-            placeholder="请输入"
-            v-decorator="[
-              'url',
-              {rules: [{ required: true, message: '请输入仓库域名', whitespace: true}, {validator: validate}]}
-            ]" />
-        </a-form-item>
-      </a-col>
-      <a-col :xl="{span: 9, offset: 1}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
-        <a-form-item
-          label="仓库管理员">
-          <a-select placeholder="请选择管理员" v-decorator="[ 'owner', {rules: [{ required: true, message: '请选择管理员'}]} ]">
-            <a-select-option value="王同学">王同学</a-select-option>
-            <a-select-option value="李同学">李同学</a-select-option>
-            <a-select-option value="黄同学">黄同学</a-select-option>
+          label="性别">
+          <a-select placeholder="请选择性别" v-decorator="[ 'sex', {rules: [{ required: true, message: '请选择性别'}]} ]">
+            <a-select-option value="male">男</a-select-option>
+            <a-select-option value="female">女</a-select-option>
           </a-select>
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="婚姻状况">
+          <a-select placeholder="请选择婚姻状况" v-decorator="[ 'marital', {rules: [{ required: true, message: '请选择婚姻状况'}]} ]">
+            <a-select-option value="single">未婚</a-select-option>
+            <a-select-option value="married">已婚</a-select-option>
+            <a-select-option value="widowed">丧偶</a-select-option>
+            <a-select-option value="divorce">离异</a-select-option>
+          </a-select>
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="出生日期">
+          <a-date-picker v-decorator="[ 'birthDate', {rules: [{ required: true, message: '请选择出生日期'}]} ]"/>
         </a-form-item>
       </a-col>
     </a-row>
     <a-row class="form-row" :gutter="16">
       <a-col :lg="6" :md="12" :sm="24">
-        <a-form-item
-          label="审批人">
-          <a-select placeholder="请选择审批员" v-decorator="[ 'approver', {rules: [{ required: true, message: '请选择审批员'}]} ]">
-            <a-select-option value="王晓丽">王晓丽</a-select-option>
-            <a-select-option value="李军">李军</a-select-option>
+        <a-form-item label="政治面貌">
+          <a-select placeholder="请输入政治面貌" v-decorator="[ 'political', {rules: [{ required: true, message: '请输入政治面貌'}]} ]">
+            <a-select-option value="CPC">中共党员</a-select-option>
+            <a-select-option value="Probationary">中共预备党员</a-select-option>
+            <a-select-option value="League">共青团员</a-select-option>
+            <a-select-option value="Masses">群众</a-select-option>
+            <a-select-option value="Independents">无党派人士</a-select-option>
           </a-select>
         </a-form-item>
       </a-col>
-      <a-col :xl="{span: 7, offset: 1}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
+      <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="生效日期">
-          <a-range-picker
-            style="width: 100%"
+          label="身份证号">
+          <a-input
+            placeholder="请输入身份证号"
             v-decorator="[
-              'dateRange',
-              {rules: [{ required: true, message: '请选择生效日期'}]}
+              'IDNumber',
+              {rules: [{ required: true, message: '请输入身份证号', whitespace: true}]}
             ]" />
         </a-form-item>
       </a-col>
-      <a-col :xl="{span: 9, offset: 1}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
+      <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="仓库类型">
-          <a-select
-            placeholder="请选择仓库类型"
-            v-decorator="[
-              'type',
-              {rules: [{ required: true, message: '请选择仓库类型'}]}
-            ]" >
-            <a-select-option value="公开">公开</a-select-option>
-            <a-select-option value="私密">私密</a-select-option>
+          label="最高学历">
+          <a-select placeholder="请输入最高学历" v-decorator="[ 'education', {rules: [{ required: true, message: '请输入最高学历'}]} ]">
+            <a-select-option value="doctor">博士</a-select-option>
+            <a-select-option value="master">硕士</a-select-option>
+            <a-select-option value="undergraduate">本科</a-select-option>
+            <a-select-option value="high">高中</a-select-option>
+            <a-select-option value="middle">初中</a-select-option>
+            <a-select-option value="primary">小学</a-select-option>
           </a-select>
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="最高学历毕业院校">
+          <a-input
+            placeholder="请输入毕业院校"
+            v-decorator="[
+              'GraduateSchool',
+              {rules: [{ required: true, message: '请输入毕业院校', whitespace: true}]}
+            ]" />
+        </a-form-item>
+      </a-col>
+    </a-row>
+    <a-row class="form-row" :gutter="16">
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item label="所属部门">
+          <a-input
+            placeholder="请输入所属部门"
+            v-decorator="[
+              'department',
+              {rules: [{ required: true, message: '请输入所属部门', whitespace: true}]}
+            ]" />
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="职位">
+          <a-input
+            placeholder="请输入职位"
+            v-decorator="[
+              'position',
+              {rules: [{ required: true, message: '请输入职位', whitespace: true}]}
+            ]" />
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="薪资范畴">
+          <a-select placeholder="请选择薪资范畴" v-decorator="[ 'salary', {rules: [{ required: true, message: '请选择薪资范畴'}]} ]">
+            <a-select-option value="5k">小于5k</a-select-option>
+            <a-select-option value="10k">5k-10k</a-select-option>
+            <a-select-option value="15k">10k-15k</a-select-option>
+            <a-select-option value="20k">15k-20k</a-select-option>
+            <a-select-option value="25k">大于20k</a-select-option>
+          </a-select>
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="入职日期">
+          <a-date-picker v-decorator="[ 'EntryDate', {rules: [{ required: true, message: '请选择入职日期'}]} ]"/>
         </a-form-item>
       </a-col>
     </a-row>
@@ -102,13 +166,6 @@ export default {
           })
         }
       })
-    },
-    validate (rule, value, callback) {
-      const regex = /^user-(.*)$/
-      if (!regex.test(value)) {
-        callback(new Error('需要以 user- 开头'))
-      }
-      callback()
     }
   }
 }

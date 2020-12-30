@@ -9,27 +9,18 @@
     :i18nRender="i18nRender"
     v-bind="settings"
   >
-
-    <!-- 1.0.0+ 版本 pro-layout 提供 API，
-          我们推荐使用这种方式进行 LOGO 和 title 自定义
-    -->
     <template v-slot:menuHeaderRender>
       <div>
-        <logo-svg />
         <h1>{{ title }}</h1>
       </div>
     </template>
-    <!-- 1.0.0+ 版本 pro-layout 提供 API,
-          增加 Header 左侧内容区自定义
-    -->
     <template v-slot:headerContentRender>
-      <div>
+      <div @click="reload()">
         <a-tooltip title="刷新页面">
-          <a-icon type="reload" style="font-size: 18px;cursor: pointer;" @click="() => { $message.info('只是一个DEMO') }" />
+          <a-icon type="reload" style="font-size: 18px;cursor: pointer;" />
         </a-tooltip>
       </div>
     </template>
-
     <setting-drawer :settings="settings" @change="handleSettingChange">
       <div style="margin: 12px 0;">
         This is SettingDrawer custom footer content.
@@ -56,7 +47,6 @@ import defaultSettings from '@/config/defaultSettings'
 import RightContent from '@/components/GlobalHeader/RightContent'
 import GlobalFooter from '@/components/GlobalFooter'
 import Ads from '@/components/Other/CarbonAds'
-import LogoSvg from '../assets/logo.svg?inline'
 
 export default {
   name: 'BasicLayout',
@@ -64,7 +54,6 @@ export default {
     SettingDrawer,
     RightContent,
     GlobalFooter,
-    LogoSvg,
     Ads
   },
   data () {
@@ -77,7 +66,7 @@ export default {
       menus: [],
       // 侧栏收起状态
       collapsed: false,
-      title: defaultSettings.title,
+      title: '跨组织人才管理系统',
       settings: {
         // 布局类型
         layout: defaultSettings.layout, // 'sidemenu', 'topmenu'
@@ -90,13 +79,11 @@ export default {
         fixedHeader: defaultSettings.fixedHeader,
         fixSiderbar: defaultSettings.fixSiderbar,
         colorWeak: defaultSettings.colorWeak,
-
         hideHintAlert: false,
         hideCopyButton: false
       },
       // 媒体查询
       query: {},
-
       // 是否手机模式
       isMobile: false
     }
@@ -169,6 +156,9 @@ export default {
           }
           break
       }
+    },
+    reload () {
+      location.reload()
     }
   }
 }

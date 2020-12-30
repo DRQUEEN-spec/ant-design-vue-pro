@@ -1,12 +1,17 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-30 17:43:16
+ * @LastEditTime: 2020-12-30 21:09:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ant-design-vue-pro\src\components\GlobalFooter\index.vue
+-->
 <template>
   <global-footer class="footer custom-render">
     <template v-slot:links>
-      <a href="https://www.github.com/vueComponent/pro-layout" target="_blank">Pro Layout</a>
-      <a href="https://www.github.com/vueComponent/ant-design-vue-pro" target="_blank">Github</a>
-      <a href="https://www.github.com/sendya/" target="_blank">@Sendya</a>
-    </template>
-    <template v-slot:copyright>
-      <a href="https://github.com/vueComponent" target="_blank">vueComponent</a>
+      <a href="https://www.fzu.edu.cn/" target="_blank">福州大学</a>
+      <a href="https://2x.antdv.com/docs/vue/introduce-cn/" target="_blank">Ant Design of Vue</a>
+      <a href="https://github.com/DRQUEEN-spec/" target="_blank">@DRQUEEN-spec</a>
     </template>
   </global-footer>
 </template>
