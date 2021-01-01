@@ -3,12 +3,12 @@
     <a-card class="card" title="基础信息" :bordered="false">
       <repository-form ref="repository" :showSubmit="false" />
     </a-card>
-    <!-- <a-card class="card" title="工作情况" :bordered="false">
+    <a-card class="card" title="工作情况" :bordered="false">
       <task-form ref="task" :showSubmit="false" />
     </a-card>
     <a-card class="card" title="主观评定" :bordered="false">
       <evaluate-form ref="evaluate" :showSubmit="false" />
-    </a-card> -->
+    </a-card>
 
     <!-- fixed footer toolbar -->
     <footer-tool-bar :is-mobile="isMobile" :collapsed="sideCollapsed">

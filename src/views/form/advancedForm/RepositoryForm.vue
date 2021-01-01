@@ -1,12 +1,19 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-30 17:43:17
- * @LastEditTime: 2020-12-31 02:19:14
+ * @LastEditTime: 2021-01-01 20:40:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ant-design-vue-pro\src\views\form\advancedForm\RepositoryForm.vue
 -->
 <template>
+  <!--
+  校验规则说明
+  message	校验提示文案
+  pattern	正则表达式校验
+  required	是否为必填项
+  whitespace	空格是否会被视为错误
+  -->
   <a-form @submit="handleSubmit" :form="form" class="form">
     <a-row class="form-row" :gutter="16">
       <a-col :lg="6" :md="12" :sm="24">
@@ -42,7 +49,7 @@
       <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
           label="出生日期">
-          <a-date-picker v-decorator="[ 'birthDate', {rules: [{ required: true, message: '请选择出生日期'}]} ]"/>
+          <a-date-picker v-decorator="[ 'birthDate', {rules: [{ required: true, message: '请选择出生日期'}]} ]" placeholder="请选择出生日期" />
         </a-form-item>
       </a-col>
     </a-row>
@@ -65,20 +72,19 @@
             placeholder="请输入身份证号"
             v-decorator="[
               'IDNumber',
-              {rules: [{ required: true, message: '请输入身份证号', whitespace: true}]}
+              {rules: [{ required: true, message: '请输入正确的身份证号', whitespace: true, pattern:
+              /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/}]}
             ]" />
         </a-form-item>
       </a-col>
       <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="最高学历">
-          <a-select placeholder="请输入最高学历" v-decorator="[ 'education', {rules: [{ required: true, message: '请输入最高学历'}]} ]">
+          label="学历">
+          <a-select placeholder="请输入学历" v-decorator="[ 'education', {rules: [{ required: true, message: '请输入学历'}]} ]">
             <a-select-option value="doctor">博士</a-select-option>
             <a-select-option value="master">硕士</a-select-option>
             <a-select-option value="undergraduate">本科</a-select-option>
-            <a-select-option value="high">高中</a-select-option>
-            <a-select-option value="middle">初中</a-select-option>
-            <a-select-option value="primary">小学</a-select-option>
+            <a-select-option value="high">高中及以下</a-select-option>
           </a-select>
         </a-form-item>
       </a-col>
@@ -131,7 +137,52 @@
       <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
           label="入职日期">
-          <a-date-picker v-decorator="[ 'EntryDate', {rules: [{ required: true, message: '请选择入职日期'}]} ]"/>
+          <a-date-picker v-decorator="[ 'EntryDate', {rules: [{ required: true, message: '请选择入职日期'}]} ]" placeholder="请选择入职日期"/>
+        </a-form-item>
+      </a-col>
+    </a-row>
+    <a-row class="form-row" :gutter="16">
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item label="家庭住址">
+          <a-input
+            placeholder="请输入家庭住址"
+            v-decorator="[
+              'address',
+              {rules: [{ required: true, message: '请输入家庭住址', whitespace: true}]}
+            ]" />
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="手机号码">
+          <a-input
+            placeholder="请输入手机号码"
+            v-decorator="[
+              'phone',
+              {rules: [{ required: true, message: '请输入正确的手机号码', whitespace: true, pattern: /^1[3456789]\d{9}$/}]}
+            ]" />
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="电子邮箱">
+          <a-input
+            placeholder="请输入电子邮箱"
+            v-decorator="[
+              'Email',
+              {rules: [{ required: true, message: '请输入正确的Email', whitespace: true, pattern: /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/}]}
+            ]" />
+        </a-form-item>
+      </a-col>
+      <a-col :lg="6" :md="12" :sm="24">
+        <a-form-item
+          label="其他联系方式如微信/QQ">
+          <a-input
+            placeholder="请输入其他联系方式"
+            v-decorator="[
+              'QQ',
+              {rules: [{ message: '请输入其他联系方式', whitespace: true}]}
+            ]" />
         </a-form-item>
       </a-col>
     </a-row>
