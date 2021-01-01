@@ -4,12 +4,11 @@
       <repository-form ref="repository" :showSubmit="false" />
     </a-card>
     <a-card class="card" title="工作情况" :bordered="false">
+      <ProjectForm @func="getMsgFormSon" />
+    </a-card>
+    <a-card class="card" title="综合评定" :bordered="false">
       <task-form ref="task" :showSubmit="false" />
     </a-card>
-    <a-card class="card" title="主观评定" :bordered="false">
-      <evaluate-form ref="evaluate" :showSubmit="false" />
-    </a-card>
-
     <!-- fixed footer toolbar -->
     <footer-tool-bar :is-mobile="isMobile" :collapsed="sideCollapsed">
       <span class="popover-wrapper">
@@ -17,7 +16,7 @@
           <template slot="content">
             <li v-for="item in errors" :key="item.key" @click="scrollToField(item.key)" class="antd-pro-pages-forms-style-errorListItem">
               <a-icon type="cross-circle-o" class="antd-pro-pages-forms-style-errorIcon" />
-              <div class="">{{ item.message }}</div>
+              <div>{{ item.message }}</div>
               <div class="antd-pro-pages-forms-style-errorField">{{ item.fieldLabel }}</div>
             </li>
           </template>
@@ -34,7 +33,7 @@
 <script>
 import RepositoryForm from './RepositoryForm'
 import TaskForm from './TaskForm'
-import EvaluateForm from './EvaluateForm'
+import ProjectForm from './ProjectForm'
 import FooterToolBar from '@/components/FooterToolbar'
 import { baseMixin } from '@/store/app-mixin'
 
@@ -45,52 +44,39 @@ export default {
     FooterToolBar,
     RepositoryForm,
     TaskForm,
-    EvaluateForm
+    ProjectForm
   },
   data () {
     return {
       loading: false,
-      memberLoading: false,
-      errors: []
+      errors: [],
+      projectData: [],
+      saveCount: 0
     }
   },
   methods: {
     handleSubmit (e) {
       e.preventDefault()
     },
-    remove (key) {
-      const newData = this.data.filter(item => item.key !== key)
-      this.data = newData
+    getMsgFormSon (data) {
+      this.saveCount++
+      this.$message
+        .loading('保存中，请稍后..', 0.5)
+        .then(() => { this.projectData = data })
+        .then(() => this.$message.success('保存成功', 1))
     },
-    toggle (key) {
-      const target = this.data.find(item => item.key === key)
-      target._originalData = { ...target }
-      target.editable = !target.editable
-    },
-    getRowByKey (key, newData) {
-      const data = this.data
-      return (newData || data).find(item => item.key === key)
-    },
-    cancel (key) {
-      const target = this.data.find(item => item.key === key)
-      Object.keys(target).forEach(key => { target[key] = target._originalData[key] })
-      target._originalData = undefined
-    },
-    handleChange (value, key, column) {
-      const newData = [...this.data]
-      const target = newData.find(item => key === item.key)
-      if (target) {
-        target[column] = value
-        this.data = newData
-      }
-    },
-
     // 最终全页面提交
     validate () {
+      if (!this.saveCount) {
+        this.$message.error('请单击保存修改按钮')
+        return
+      }
+      console.log(this.projectData)
+      // const repository = this.$refs.repository
       const { $refs: { repository, task }, $notification } = this
       const repositoryForm = new Promise((resolve, reject) => {
+        // validateFields	触发表单验证
         repository.form.validateFields((err, values) => {
-          console.log(values)
           if (err) {
             reject(err)
             return
@@ -110,11 +96,14 @@ export default {
       // clean this.errors
       this.errors = []
       Promise.all([repositoryForm, taskForm]).then(values => {
-        $notification['error']({
-          message: 'Received values of form:',
-          description: JSON.stringify(values)
+        console.log(values)
+        $notification['success']({
+          message: '提交成功!',
+          description: `成功创建员工--${values[0].name}--的人才档案!`
         })
       }).catch(() => {
+        // Object.assign方法用于对象的合并
+        // Object.assign(obj) === obj // true
         const errors = Object.assign({}, repository.form.getFieldsError(), task.form.getFieldsError())
         const tmp = { ...errors }
         this.errorList(tmp)

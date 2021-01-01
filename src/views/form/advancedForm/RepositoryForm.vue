@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-30 17:43:17
- * @LastEditTime: 2021-01-01 20:40:38
+ * @LastEditTime: 2021-01-02 00:16:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ant-design-vue-pro\src\views\form\advancedForm\RepositoryForm.vue
@@ -176,7 +176,7 @@
       </a-col>
       <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="其他联系方式如微信/QQ">
+          label="其他联系方式如微信/QQ(选填)">
           <a-input
             placeholder="请输入其他联系方式"
             v-decorator="[
