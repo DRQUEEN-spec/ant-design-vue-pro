@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-30 17:43:16
+ * @LastEditTime: 2021-01-02 15:29:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \ant-design-vue-pro\src\config\defaultSettings.js
+ */
 /**
  * 项目默认配置项
  * primaryColor - 默认主题色, 如果修改颜色不生效，请清理 localStorage
@@ -14,11 +22,11 @@
 
 export default {
   navTheme: 'dark', // theme for nav menu
-  primaryColor: '#F5222D', // primary color of ant design
+  primaryColor: '#52C41A', // primary color of ant design
   layout: 'sidemenu', // nav menu position: `sidemenu` or `topmenu`
   contentWidth: 'Fluid', // layout of content: `Fluid` or `Fixed`, only works when layout is topmenu
   fixedHeader: false, // sticky header
-  fixSiderbar: false, // sticky siderbar
+  fixSiderbar: true, // sticky siderbar
   colorWeak: false,
   menu: {
     locale: true
