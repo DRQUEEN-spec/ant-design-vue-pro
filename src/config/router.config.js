@@ -13,27 +13,26 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: 'menu.home' },
-    redirect: '/TalentFiles/advanced-form',
+    redirect: '/TalentFiles/newForm',
     children: [
       // TalentFiles
       {
         path: '/TalentFiles',
         name: 'TalentFiles',
-        redirect: '/TalentFiles/advanced-form',
+        redirect: '/TalentFiles/newForm',
         component: RouteView,
         meta: { title: '人才档案', keepAlive: true, icon: bxAnaalyse, permission: ['TalentFiles'] },
         children: [
           {
-            path: '/TalentFiles/advanced-form',
-            name: 'AdvanceForm',
+            path: '/TalentFiles/newForm',
+            name: 'NewForm',
             component: () => import('@/views/form/advancedForm/AdvancedForm'),
             meta: { title: '新建档案', keepAlive: true, permission: ['TalentFiles'] }
           },
           {
-            path: '/TalentFiles/table-list/:pageNo([1-9]\\d*)?',
-            name: 'TableListWrapper',
-            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-            component: () => import('@/views/list/TableList'),
+            path: '/TalentFiles/card',
+            name: 'CardList',
+            component: () => import('@/views/list/CardList'),
             meta: { title: '档案列表', keepAlive: true, permission: ['TalentFiles'] }
           }
         ]

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-30 17:43:17
- * @LastEditTime: 2021-01-02 00:16:31
+ * @LastEditTime: 2021-01-02 17:04:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ant-design-vue-pro\src\views\form\advancedForm\RepositoryForm.vue
@@ -124,13 +124,13 @@
       </a-col>
       <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="薪资范畴">
-          <a-select placeholder="请选择薪资范畴" v-decorator="[ 'salary', {rules: [{ required: true, message: '请选择薪资范畴'}]} ]">
-            <a-select-option value="5k">小于5k</a-select-option>
-            <a-select-option value="10k">5k-10k</a-select-option>
+          label="税前月薪">
+          <a-select placeholder="请选择税前月薪" v-decorator="[ 'salary', {rules: [{ required: true, message: '请选择税前月薪'}]} ]">
+            <a-select-option value="10k">小于10k</a-select-option>
             <a-select-option value="15k">10k-15k</a-select-option>
             <a-select-option value="20k">15k-20k</a-select-option>
-            <a-select-option value="25k">大于20k</a-select-option>
+            <a-select-option value="30k">20k-30k</a-select-option>
+            <a-select-option value="40k">大于30k</a-select-option>
           </a-select>
         </a-form-item>
       </a-col>

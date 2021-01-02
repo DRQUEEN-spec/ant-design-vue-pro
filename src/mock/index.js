@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-30 17:43:17
+ * @LastEditTime: 2021-01-02 15:43:24
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \ant-design-vue-pro\src\mock\index.js
+ */
 import { isIE } from '@/utils/util'
 
 // 判断环境不是 prod 或者 preview 是 true 时，加载 mock 服务
@@ -17,7 +25,7 @@ if (process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 'tr
   require('./services/article')
 
   Mock.setup({
-    timeout: 800 // setter delay time
+    timeout: 100 // setter delay time
   })
   console.log('[antd-pro] mock mounted')
 }
