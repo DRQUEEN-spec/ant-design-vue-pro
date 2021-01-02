@@ -9,6 +9,9 @@
     <a-card class="card" title="综合评定" :bordered="false">
       <task-form ref="task" :showSubmit="false" />
     </a-card>
+    <a-card class="card" title="发布设置" :bordered="false">
+      <release-form ref="release" :showSubmit="false" />
+    </a-card>
     <!-- fixed footer toolbar -->
     <footer-tool-bar :is-mobile="isMobile" :collapsed="sideCollapsed">
       <span class="popover-wrapper">
@@ -34,6 +37,7 @@
 import RepositoryForm from './RepositoryForm'
 import TaskForm from './TaskForm'
 import ProjectForm from './ProjectForm'
+import ReleaseForm from './ReleaseForm'
 import FooterToolBar from '@/components/FooterToolbar'
 import { baseMixin } from '@/store/app-mixin'
 
@@ -44,7 +48,8 @@ export default {
     FooterToolBar,
     RepositoryForm,
     TaskForm,
-    ProjectForm
+    ProjectForm,
+    ReleaseForm
   },
   data () {
     return {
@@ -73,7 +78,7 @@ export default {
       }
       console.log(this.projectData)
       // const repository = this.$refs.repository
-      const { $refs: { repository, task }, $notification } = this
+      const { $refs: { repository, task, release }, $notification } = this
       const repositoryForm = new Promise((resolve, reject) => {
         // validateFields	触发表单验证
         repository.form.validateFields((err, values) => {
@@ -93,9 +98,20 @@ export default {
           resolve(values)
         })
       })
+      const releaseForm = new Promise((resolve, reject) => {
+        // validateFields	触发表单验证
+        release.form.validateFields((err, values) => {
+          if (err) {
+            reject(err)
+            return
+          }
+          resolve(values)
+          console.log(values)
+        })
+      })
       // clean this.errors
       this.errors = []
-      Promise.all([repositoryForm, taskForm]).then(values => {
+      Promise.all([repositoryForm, taskForm, releaseForm]).then(values => {
         console.log(values)
         $notification['success']({
           message: '提交成功!',
